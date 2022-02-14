@@ -1,0 +1,23 @@
+{
+  "name": "mirorus",
+  "version": "1.0.0",
+  "description": "Axorus DMD",
+  "main": "main.mjs",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/upkanet/mirorus.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/upkanet/mirorus/issues"
+  },
+  "homepage": "https://github.com/upkanet/mirorus#readme",
+  "dependencies": {
+    "ffi-napi": "^4.0.3",
+    "ref-napi": "^3.0.3"
+  }
+}

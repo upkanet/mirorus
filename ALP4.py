@@ -394,7 +394,7 @@ class ALP4(object):
         if (version == '4.1'):
             libPath += 'alpD41.dll'
         elif (version == '4.2'):
-            libPath += 'alpV42basic.dll'
+            libPath += 'alp42.dll'
         elif (version == '4.3'):
             libPath += 'alp4395.dll'
 
