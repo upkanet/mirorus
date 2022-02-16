@@ -147,7 +147,8 @@ class Drawing{
 
     move(speed,x,y){
         let img = this.img;
-        this.ctx.putImageData(this.img,x*speed,y*speed);
+        this.ctx.clearRect(0,0,this.w,this.h);
+        this.ctx.putImageData(img,x*speed,y*speed);
     }
 
 
