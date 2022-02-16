@@ -48,3 +48,9 @@
 #statusDMD{
     color:var(--bs-secondary);
 }
+
+.cursor{
+    pointer-events: none;
+    position:absolute;
+    border: 1px dashed #375a7f;
+}

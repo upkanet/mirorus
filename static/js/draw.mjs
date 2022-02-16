@@ -3,7 +3,7 @@ class Drawing{
         this.canvas = document.getElementById(id);
         this.ctx = this.canvas.getContext('2d');
         this.activemouse = false;
-        this.rectsize = 0;
+        this.activecursor = false;
     }
 
     get w(){
@@ -18,6 +18,10 @@ class Drawing{
         return this.w * this.h;
     }
 
+    get rectsize(){
+        return Number($('#rangeRectSize').val()) / 100 * this.w / 10;
+    }
+
     mousedown(e){
         this.activemouse = true;
         if(e.ctrlKey){
@@ -28,17 +32,43 @@ class Drawing{
             console.log("draw");
             this.ctx.fillStyle=$(this.canvas).data('drawingcolor');
         }
-        this.rectsize = Number($('#rangeRectSize').val()) / 100 * this.w / 10;
         this.fillRect(e);
     }
     
     mousemove(e){
         if(this.activemouse) this.fillRect(e);
+        if(this.activecursor) this.movecursor(e);
     }
 
     mouseup(e){
         this.activemouse = false;
         this.fillRect(e);
+    }
+
+    mouseover(e){
+        this.enablecursor();
+    }
+
+    mouseout(e){
+        this.disablecursor();
+    }
+
+    enablecursor(){
+        this.activecursor = true;
+        $('#cursor').show();
+    }
+
+    disablecursor(){
+        this.activecursor = false;
+        $('#cursor').hide();
+    }
+
+    movecursor(e){
+        let rs = this.rectsize;
+        $('#cursor').css('left',e.clientX - rs / 2);
+        $('#cursor').css('top',e.clientY - rs / 2);
+        $('#cursor').css('width',rs);
+        $('#cursor').css('height',rs);
     }
 
     fillRect(e){
@@ -65,7 +95,13 @@ class Drawing{
 
     init(){
         this.full("black");
+        this.generateCursor();
         initGrid();
+    }
+
+    generateCursor(){
+        $("body").append('<div id="cursor" class="cursor"></div>');
+        $('#cursor').hide();
     }
 
     get img(){

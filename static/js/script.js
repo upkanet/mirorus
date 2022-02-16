@@ -5,6 +5,8 @@ draw.init();
 $("#drawing").mousedown((e)=>{draw.mousedown(e)})
 $("#drawing").mousemove((e)=>{draw.mousemove(e)})
 $("#drawing").mouseup((e)=>{draw.mouseup(e)})
+$("#drawing").mouseover((e)=>{draw.mouseover(e)})
+$("#drawing").mouseout((e)=>{draw.mouseout(e)})
 
 $('.btncolor').click((e)=>{draw.selectColor(e)});
 
