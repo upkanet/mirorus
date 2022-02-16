@@ -115,9 +115,11 @@ class Drawing{
         let newImg = this.img;
         for(let p = 0; p< this.nbpix;p++){
             let p0 = p*4;
-            newImg.data[p0] = 255-newImg.data[p0];
-            newImg.data[p0+1] = 255-newImg.data[p0+1];
-            newImg.data[p0+2] = 255-newImg.data[p0+2];
+            let newColor = (newImg.data[p0+3] == 0) ? 255 : 0;
+            newImg.data[p0] = newColor;
+            newImg.data[p0+1] = newColor;
+            newImg.data[p0+2] = newColor;
+            newImg.data[p0+3] = newColor;
         }
         this.putImg(newImg);
     }
