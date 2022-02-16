@@ -10,3 +10,5 @@ $('.btncolor').click((e)=>{draw.selectColor(e)});
 
 $('#btnFullfield').click(()=>{draw.fullfield()});
 $('#btnDelete').click(()=>{draw.delete()});
+
+$('#btnInvert').click(()=>{draw.invert()});

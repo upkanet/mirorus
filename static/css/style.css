@@ -44,3 +44,7 @@
     left:0px;
     top:0px;
 }
+
+#statusDMD{
+    color:var(--bs-secondary);
+}

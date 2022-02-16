@@ -6,6 +6,18 @@ class Drawing{
         this.rectsize = 0;
     }
 
+    get w(){
+        return this.canvas.width;
+    }
+
+    get h(){
+        return this.canvas.height;
+    }
+
+    get nbpix(){
+        return this.w * this.h;
+    }
+
     mousedown(e){
         this.activemouse = true;
         if(e.ctrlKey){
@@ -16,7 +28,7 @@ class Drawing{
             console.log("draw");
             this.ctx.fillStyle=$(this.canvas).data('drawingcolor');
         }
-        this.rectsize = Number($('#rangeRectSize').val()) / 100 * this.canvas.width / 10;
+        this.rectsize = Number($('#rangeRectSize').val()) / 100 * this.w / 10;
         this.fillRect(e);
     }
     
@@ -40,7 +52,7 @@ class Drawing{
     
     full(color){
         this.ctx.fillStyle=color;
-        this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
+        this.ctx.fillRect(0,0,this.w,this.h);
     }
 
     fullfield(){
@@ -55,6 +67,26 @@ class Drawing{
         this.full("black");
         initGrid();
     }
+
+    get img(){
+        return this.ctx.getImageData(0,0,this.w,this.h);
+    }
+
+    putImg(imgData){
+        this.ctx.putImageData(imgData,0,0);
+    }
+
+    invert(){
+        let newImg = this.img;
+        for(let p = 0; p< this.nbpix;p++){
+            let p0 = p*4;
+            newImg.data[p0] = 255-newImg.data[p0];
+            newImg.data[p0+1] = 255-newImg.data[p0+1];
+            newImg.data[p0+2] = 255-newImg.data[p0+2];
+        }
+        this.putImg(newImg);
+    }
+
 
 }
 
