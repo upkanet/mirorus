@@ -1,9 +1,12 @@
-import {initDraw,mousedown,mousemove,mouseup,selectColor} from './draw.mjs'
+import {draw} from './draw.mjs'
 
-initDraw();
+draw.init();
 
-$("#drawing").mousedown(mousedown)
-$("#drawing").mousemove(mousemove)
-$("#drawing").mouseup(mouseup)
+$("#drawing").mousedown((e)=>{draw.mousedown(e)})
+$("#drawing").mousemove((e)=>{draw.mousemove(e)})
+$("#drawing").mouseup((e)=>{draw.mouseup(e)})
 
-$('.btncolor').click(selectColor);
+$('.btncolor').click((e)=>{draw.selectColor(e)});
+
+$('#btnFullfield').click(()=>{draw.fullfield()});
+$('#btnDelete').click(()=>{draw.delete()});

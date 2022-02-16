@@ -1,43 +1,61 @@
-const canvasd = document.getElementById('drawing');
-const ctxd = canvasd.getContext('2d');
-let activemouse = false;
-let rectsize = 0;
-
-function mousedown(e){
-    activemouse = true;
-    if(e.ctrlKey){
-        console.log("erase");
-        ctxd.fillStyle="black";
+class Drawing{
+    constructor(id){
+        this.canvas = document.getElementById(id);
+        this.ctx = this.canvas.getContext('2d');
+        this.activemouse = false;
+        this.rectsize = 0;
     }
-    else{
-        console.log("draw");
-        ctxd.fillStyle=$(canvasd).data('drawingcolor');
+
+    mousedown(e){
+        this.activemouse = true;
+        if(e.ctrlKey){
+            console.log("erase");
+            this.ctx.fillStyle="black";
+        }
+        else{
+            console.log("draw");
+            this.ctx.fillStyle=$(this.canvas).data('drawingcolor');
+        }
+        this.rectsize = Number($('#rangeRectSize').val()) / 100 * this.canvas.width / 10;
+        this.fillRect(e);
     }
-    rectsize = Number($('#rangeRectSize').val()) / 100 * canvasd.width / 10;
-    fillRect(e);
-}
+    
+    mousemove(e){
+        if(this.activemouse) this.fillRect(e);
+    }
 
-function mousemove(e){
-    if(activemouse) fillRect(e);
-}
+    mouseup(e){
+        this.activemouse = false;
+        this.fillRect(e);
+    }
 
-function mouseup(e){
-    activemouse = false;
-    fillRect(e);
-}
+    fillRect(e){
+        this.ctx.fillRect(e.offsetX-this.rectsize/2,e.offsetY-this.rectsize/2,this.rectsize,this.rectsize);
+    }
 
-function fillRect(e){
-    ctxd.fillRect(e.offsetX-rectsize/2,e.offsetY-rectsize/2,rectsize,rectsize);
-}
+    selectColor(e){
+        let color = $(e.target).data('color');
+        $(this.canvas).data('drawingcolor',color);
+    }
+    
+    full(color){
+        this.ctx.fillStyle=color;
+        this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
+    }
 
-function selectColor(e){
-    let color = $(e.target).data('color');
-    $(canvasd).data('drawingcolor',color);
-}
+    fullfield(){
+        this.full("white");
+    }
 
-function initDraw(){
-    ctxd.fillRect(0,0,canvasd.width,canvasd.height);
-    initGrid();
+    delete(){
+        if(confirm("Delete everything")) this.full("black");
+    }
+
+    init(){
+        this.full("black");
+        initGrid();
+    }
+
 }
 
 function initGrid(){
@@ -58,4 +76,6 @@ function initGrid(){
     ctxg.stroke();
 }
 
-export {initDraw,mousedown,mousemove,mouseup,selectColor}
+let draw = new Drawing('drawing');
+
+export {draw}
