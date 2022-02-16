@@ -1,7 +1,9 @@
-import {init,mousedown,mousemove,mouseup} from './draw.mjs'
+import {initDraw,mousedown,mousemove,mouseup,selectColor} from './draw.mjs'
 
-init();
+initDraw();
 
 $("#drawing").mousedown(mousedown)
 $("#drawing").mousemove(mousemove)
 $("#drawing").mouseup(mouseup)
+
+$('.btncolor').click(selectColor);

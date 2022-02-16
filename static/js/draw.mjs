@@ -14,19 +14,28 @@ function mousedown(e){
         ctxd.fillStyle=$(canvasd).data('drawingcolor');
     }
     rectsize = Number($('#rangeRectSize').val()) / 100 * canvasd.width / 10;
-    ctxd.fillRect(e.offsetX,e.offsetY,rectsize,rectsize);
+    fillRect(e);
 }
 
 function mousemove(e){
-    if(activemouse) ctxd.fillRect(e.offsetX,e.offsetY,rectsize,rectsize);
+    if(activemouse) fillRect(e);
 }
 
 function mouseup(e){
     activemouse = false;
-    ctxd.fillRect(e.offsetX,e.offsetY,rectsize,rectsize);
+    fillRect(e);
 }
 
-function init(){
+function fillRect(e){
+    ctxd.fillRect(e.offsetX-rectsize/2,e.offsetY-rectsize/2,rectsize,rectsize);
+}
+
+function selectColor(e){
+    let color = $(e.target).data('color');
+    $(canvasd).data('drawingcolor',color);
+}
+
+function initDraw(){
     ctxd.fillRect(0,0,canvasd.width,canvasd.height);
     initGrid();
 }
@@ -49,4 +58,4 @@ function initGrid(){
     ctxg.stroke();
 }
 
-export {init,mousedown,mousemove,mouseup}
+export {initDraw,mousedown,mousemove,mouseup,selectColor}
