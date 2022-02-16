@@ -1,3 +1,4 @@
+import { dmd } from './dmd.mjs';
 import {draw} from './draw.mjs'
 
 draw.init();
@@ -15,7 +16,8 @@ $('#btnDelete').click(()=>{draw.delete()});
 
 $('#btnInvert').click(()=>{draw.invert()});
 
-$('#btnTest').click(()=>{draw.prepare("transformed")});
+$('#btnRun').click(run);
+$('#btnTest').click(test);
 
 $('body').keydown((e)=>{
     let k = e.key;
@@ -26,3 +28,13 @@ $('body').keydown((e)=>{
     if(k == "ArrowDown") draw.move(s?2:1,0,1)
     if(k == "t") $('#transformed').toggle();
 })
+
+async function test(){
+    await draw.prepare("transformed");
+    console.log(dmd.seq);
+}
+
+async function run(){
+    await draw.prepare("transformed");
+    console.log(dmd.imgArr);
+}

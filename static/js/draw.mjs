@@ -124,7 +124,7 @@ class Drawing{
         this.putImg(newImg);
     }
 
-    prepare(targetid){
+    async prepare(targetid){
         let r = Number($('#inputCalibRotate').val());
         let h = $('#checkFlipH').prop('checked');
         let v = $('#checkFlipV').prop('checked');
