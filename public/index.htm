@@ -50,26 +50,31 @@
                 </div>
                 <div class="d-grid gap-2">
                     <button class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#timingMenu"><i class="ri-timer-flash-line"></i> Timing</button>
-                    <div class="collapse" id="timingMenu">
+                    <div class="collapse show" id="timingMenu">
                         <div class="card card-body">
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class="ri-flashlight-fill"></i> Flash</span>
-                                <input type="number" class="form-control">
+                                <input type="number" class="form-control" value="10" id="inputTimingFlash">
                                 <span class="input-group-text">ms</span>
                             </div>
                             <div class="input-group mb-3">
                                 <span class="input-group-text"><i class="ri-time-line"></i> Period</span>
-                                <input type="number" class="form-control">
+                                <input type="number" class="form-control" value="2000" id="inputTimingPeriod">
                                 <span class="input-group-text">ms</span>
                             </div>
                             <div class="input-group mb-3">
-                                <span class="input-group-text"># Iterations</span>
-                                <input type="number" class="form-control">
+                                <div class="input-group-text">
+                                    <input class="form-check-input mt-0" type="checkbox" value="" id="checkboxTimingLoop" checked>
+                                    &nbsp;infinite loop
+                                </div>
+                                <span class="input-group-text">#</span>
+                                <input type="number" class="form-control" value="20" id="inputTimingIterations" disabled>
                             </div>
+                            <span id="spanTimingTotal"></span>
                         </div>
                     </div>
                     <button class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#circuitMenu"><i class="ri-grid-fill"></i> Circuit</button>
-                    <div class="collapse" id="circuitMenu">
+                    <div class="collapse show" id="circuitMenu">
                         <div class="card card-body">
                           <button class="btn btn-primary btn-lg"><i class="ri-image-line"></i> Load image</button>
                         </div>
@@ -101,7 +106,7 @@
             </div>
         </div>
     </div>
-    <canvas id="transformed" width="1024" height="768" style="border:1px solid black;"></canvas>
+    <canvas id="transformed" width="1024" height="768" style="border:1px solid black; display: none;"></canvas>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

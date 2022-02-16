@@ -4,7 +4,6 @@ import time
 
 # Load the Vialux .dll
 DMD = ALP4(version = '4.2',libDir = "dll")
-print('Lib loaded')
 # Initialize the device
 DMD.Initialize()
 
