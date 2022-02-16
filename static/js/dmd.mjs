@@ -40,7 +40,6 @@ class DMD{
         let nbimg = 0;
         let aseq = [];
         for(const color of ["white","green","blue","red","orange","yellow"]){
-            console.log(color);
             if(imgarr[color] !== undefined){
                 nbimg += 1;
                 aseq = aseq.concat(imgarr[color]);

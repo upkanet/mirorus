@@ -56,5 +56,5 @@
 .cursor{
     pointer-events: none;
     position:absolute;
-    border: 1px dashed #375a7f;
+    border: 2px dashed white;
 }

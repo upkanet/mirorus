@@ -78,6 +78,7 @@ class Drawing{
     selectColor(e){
         let color = $(e.target).data('color');
         $(this.canvas).data('drawingcolor',color);
+        $('#cursor').css('border-color',color);
     }
     
     full(color){
