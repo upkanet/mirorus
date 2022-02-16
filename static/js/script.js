@@ -12,3 +12,5 @@ $('#btnFullfield').click(()=>{draw.fullfield()});
 $('#btnDelete').click(()=>{draw.delete()});
 
 $('#btnInvert').click(()=>{draw.invert()});
+
+$('#btnTest').click(()=>{draw.prepare('transformed')});

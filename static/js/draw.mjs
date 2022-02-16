@@ -87,6 +87,29 @@ class Drawing{
         this.putImg(newImg);
     }
 
+    prepare(targetid){
+        let r = Number($('#inputCalibRotate').val());
+        let h = $('#checkFlipH').prop('checked');
+        let v = $('#checkFlipV').prop('checked');
+        console.log(r,h,v);
+        let tcan = document.getElementById(targetid);
+        let tctx = tcan.getContext('2d');
+
+        createImageBitmap(this.img).then((imgBitmap)=>{
+            tctx.clearRect(0,0,tcan.width,tcan.height);
+            //Mirror
+            tctx.translate(v ? tcan.width : 0, h ? tcan.height : 0);
+            tctx.scale(v ? -1 : 1, h ? -1 : 1);
+            //Rotate
+            tctx.translate(tcan.width / 2, tcan.height / 2);
+            tctx.rotate(r * Math.PI/180);
+            tctx.translate(-1 * tcan.width / 2, -1 * tcan.height / 2);
+            //Draw
+            tctx.drawImage(imgBitmap,0,0);
+            tctx.resetTransform();
+        })
+    }
+
 
 }
 
