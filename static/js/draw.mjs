@@ -11,7 +11,7 @@ function mousedown(e){
     }
     else{
         console.log("draw");
-        ctxd.fillStyle="white";
+        ctxd.fillStyle=$(canvasd).data('drawingcolor');
     }
     rectsize = Number($('#rangeRectSize').val()) / 100 * canvasd.width / 10;
     ctxd.fillRect(e.offsetX,e.offsetY,rectsize,rectsize);
@@ -26,4 +26,27 @@ function mouseup(e){
     ctxd.fillRect(e.offsetX,e.offsetY,rectsize,rectsize);
 }
 
-export {mousedown,mousemove,mouseup}
+function init(){
+    ctxd.fillRect(0,0,canvasd.width,canvasd.height);
+    initGrid();
+}
+
+function initGrid(){
+    console.log("Init Grid");
+    const canvasg = document.getElementById('drawinggrid');
+    const w = canvasg.width;
+    const h = canvasg.height;
+    const ctxg = canvasg.getContext('2d');
+    ctxg.strokeStyle = "#375a7f";
+    for(let i=1;i<10;i++){
+        for(let j=1;j<10;j++){
+            ctxg.moveTo(0,h/10*j);
+            ctxg.lineTo(w,h/10*j);
+            ctxg.moveTo(w/10*i,0);
+            ctxg.lineTo(w/10*i,h);
+        }
+    }
+    ctxg.stroke();
+}
+
+export {init,mousedown,mousemove,mouseup}

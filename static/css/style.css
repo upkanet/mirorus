@@ -33,3 +33,14 @@
 [data-color="red"]{
     background-color: red;
 }
+
+#drawarea{
+    position: relative;
+}
+
+#drawinggrid{
+    pointer-events: none;
+    position:absolute;
+    left:0px;
+    top:0px;
+}
