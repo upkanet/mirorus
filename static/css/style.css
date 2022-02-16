@@ -1,4 +1,35 @@
-.test{
-    background-color:red;
-    margin: 0;
+.btn-xlg{
+    padding: 0.5rem 1rem;
+    font-size: 2rem;
+    border-radius: 0.3rem;
+}
+
+.btncolor{
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+}
+
+[data-color="white"]{
+    background-color: white;
+}
+
+[data-color="orange"]{
+    background-color: orange;
+}
+
+[data-color="yellow"]{
+    background-color: yellow;
+}
+
+[data-color="green"]{
+    background-color: green;
+}
+
+[data-color="blue"]{
+    background-color: blue;
+}
+
+[data-color="red"]{
+    background-color: red;
 }

@@ -8,15 +8,95 @@
     <link rel="icon" type="image/png" href="https://www.axorus.com/icon.png">
     
     <!-- CSS -->
-    <link href="static/css/style.css" rel="stylesheet">
+    <link href="static/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="static/css/style.css" rel="stylesheet">
     <!-- JS -->
     <script type="module" src="static/js/script.js" defer></script>
 </head>
 <body>
-    <div class="test">
-        toti
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-1 text-end">
+                <button class="btn btn-xlg btn-secondary mb-1" disabled><i class="ri-checkbox-blank-circle-fill"></i></button><br>
+                <button class="btn btn-xlg btn-primary mb-1"><i class="ri-play-fill"></i></button><br>
+                <button class="btn btn-xlg btn-primary mb-1"><i class="ri-stop-fill"></i></button><br>
+                <button class="btn btn-xlg btn-success mb-1"><i class="ri-save-3-line"></i></button><br>
+                <button class="btn btn-xlg btn-success mb-1"><i class="ri-folder-open-line"></i></button><br>
+                <button class="btn btn-xlg btn-secondary mb-1"><i class="ri-question-line"></i></button><br>
+            </div>
+            <div class="col text-center">
+                <div>
+                    <input type="range" class="form-range me-2" style="width:200px;">
+                    <button class="btn btn-primary mb-1"><i class="ri-sun-line"></i></button>
+                    <button class="btn btn-primary mb-1"><i class="ri-delete-bin-line"></i></button>
+                    <button class="btn btn-primary mb-1"><i class="ri-contrast-fill"></i></button>
+                    <button class="btn btn-primary mb-1"><i class="ri-focus-3-line"></i></button>
+                </div>
+                <canvas id="drawing" width="1024" height="768" style="border:1px solid black;"></canvas>
+                <canvas id="transformed" width="1024" height="768" style="border:1px solid black;"></canvas>
+            </div>
+            <div class="col-2">
+                <div id="colorButtonsMenu">
+                    <button class="btncolor" data-color="white"></button>
+                    <button class="btncolor" data-color="green"></button><br>
+                    <button class="btncolor" data-color="blue"></button>
+                    <button class="btncolor" data-color="red"></button><br>
+                    <button class="btncolor" data-color="orange"></button>
+                    <button class="btncolor" data-color="yellow"></button>
+                </div>
+                <div class="d-grid gap-2">
+                    <button class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#timingMenu"><i class="ri-timer-flash-line"></i> Timing</button>
+                    <div class="collapse" id="timingMenu">
+                        <div class="card card-body">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="ri-flashlight-fill"></i> Flash</span>
+                                <input type="number" class="form-control">
+                                <span class="input-group-text">ms</span>
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="ri-time-line"></i> Period</span>
+                                <input type="number" class="form-control">
+                                <span class="input-group-text">ms</span>
+                            </div>
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"># Iterations</span>
+                                <input type="number" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#circuitMenu"><i class="ri-grid-fill"></i> Circuit</button>
+                    <div class="collapse" id="circuitMenu">
+                        <div class="card card-body">
+                          <button class="btn btn-primary btn-lg"><i class="ri-image-line"></i> Load image</button>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#calibMenu"><i class="ri-equalizer-fill"></i> Calibration</button>
+                    <div class="collapse" id="calibMenu">
+                        <div class="card card-body">
+                            <div class="input-group mb-3">
+                                <span class="input-group-text"><i class="ri-clockwise-line"></i> Rotate</span>
+                                <input type="number" class="form-control">
+                                <span class="input-group-text">°</span>
+                            </div>
+                            <div class="btn-group" role="group" aria-label="Basic checkbox toggle button group">
+                                <input type="checkbox" class="btn-check" id="checkFlipH" autocomplete="off">
+                                <label class="btn btn-outline-light" for="checkFlipH">Flip Horizontaly</label>
+                              
+                                <input type="checkbox" class="btn-check" id="checkFlipV" autocomplete="off">
+                                <label class="btn btn-outline-light" for="checkFlipV">Flip Verticaly</label>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#shortcutsMenu"><i class="ri-keyboard-line"></i> Shortcuts</button>
+                    <div class="collapse" id="shortcutsMenu">
+                        <div class="card card-body">
+                          shortcuts
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>

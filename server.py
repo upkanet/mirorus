@@ -15,14 +15,5 @@ def index():
     print("index")
     return render_template("index.htm")
 
-# @app.route('/css/<cssfile>')
-# def css(cssfile):
-#     return send_from_directory('css',cssfile)
-
-# @app.route('/js/<jsfile>')
-# def js(jsfile):
-#     return send_from_directory('js',jsfile)
-
-
 if __name__=="__main__":
     app.run()
