@@ -15,4 +15,14 @@ $('#btnDelete').click(()=>{draw.delete()});
 
 $('#btnInvert').click(()=>{draw.invert()});
 
-$('#btnTest').click(()=>{draw.prepare('transformed')});
+$('#btnTest').click(()=>{draw.prepare("transformed")});
+
+$('body').keydown((e)=>{
+    let k = e.key;
+    let s = e.shiftKey;
+    if(k == "ArrowLeft") draw.move(s?2:1,-1,0)
+    if(k == "ArrowRight") draw.move(s?2:1,1,0)
+    if(k == "ArrowUp") draw.move(s?2:1,0,-1)
+    if(k == "ArrowDown") draw.move(s?2:1,0,1)
+    if(k == "t") $('#transformed').toggle();
+})

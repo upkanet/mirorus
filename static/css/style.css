@@ -38,6 +38,10 @@
     position: relative;
 }
 
+#drawing{
+    background-color: black;
+}
+
 #drawinggrid{
     pointer-events: none;
     position:absolute;
