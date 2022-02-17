@@ -30,6 +30,7 @@ $('#checkboxTimingLoop').change((e)=>{
 });
 $('#inputTimingIterations').change(computeTiming);
 $('#spanTimingTotal').ready(computeTiming);
+$('#btnCircuitLoad').click(()=>{draw.loadCircuit()});
 
 //Shortcuts
 $('body').keydown((e)=>{
@@ -40,6 +41,10 @@ $('body').keydown((e)=>{
     if(k == "ArrowUp") draw.move(s?2:1,0,-1)
     if(k == "ArrowDown") draw.move(s?2:1,0,1)
     if(k == "t") $('#transformed').toggle();
+    if(k == "q" || k == "Q") draw.moveCircuit(s?2:1,-1,0)
+    if(k == "d" || k == "D") draw.moveCircuit(s?2:1,1,0)
+    if(k == "z" || k == "Z") draw.moveCircuit(s?2:1,0,-1)
+    if(k == "s" || k == "S") draw.moveCircuit(s?2:1,0,1)
 })
 
 function checkloop(e){

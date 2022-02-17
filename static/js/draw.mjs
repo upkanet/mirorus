@@ -163,24 +163,21 @@ class Drawing{
     }
 
     loadImg(){
-        let form = document.createElement('form');
-        var f = document.createElement('input');
-        f.style.display='none';
-        f.type='file';
-        f.name='file';
-        form.appendChild(f);
-        f.click();
-        $(f).change((e)=>{
-            var URL = window.webkitURL || window.URL;
-            var url = URL.createObjectURL(e.target.files[0]);
-            var img = new Image();
-            img.src = url;
-            img.onload = () => {
-                    let img_width = img.width;
-                    let img_height = img.height;
-                    this.ctx.drawImage(img, 0, 0, img_width, img_height);
-            }
+        loadFile((img)=>{
+            this.ctx.drawImage(img, 0, 0, img.width, img.height);
         })
+    }
+
+    loadCircuit(){
+        loadFile((img)=>{
+            $('#circuitarea').html(img);
+        })
+    }
+
+    moveCircuit(speed,x,y){
+        let ca = $('#circuitarea');
+        ca.css('left',Number(ca.css('left').split('px')[0])+x*speed+'px');
+        ca.css('top',Number(ca.css('top').split('px')[0])+y*speed+'px');
     }
 
 
@@ -202,6 +199,25 @@ function initGrid(){
         }
     }
     ctxg.stroke();
+}
+
+function loadFile(callback){
+    let form = document.createElement('form');
+        var f = document.createElement('input');
+        f.style.display='none';
+        f.type='file';
+        f.name='file';
+        form.appendChild(f);
+        f.click();
+        $(f).change((e)=>{
+            var URL = window.webkitURL || window.URL;
+            var url = URL.createObjectURL(e.target.files[0]);
+            var img = new Image();
+            img.src = url;
+            img.onload = () => {
+                    callback(img);
+            }
+        })
 }
 
 let draw = new Drawing('drawing');
