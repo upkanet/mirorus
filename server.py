@@ -33,9 +33,12 @@ def index():
 
 @app.route('/timing', methods = ['POST'])
 def timing():
-    i = request.form['flash'] * 1000 #microsec to ms
-    p = request.form['period'] * 1000 #microsec to ms
-    DMD.SetTiming(illuminationTime= i, pictureTime = p)
+    i = int(request.form['flash']) * 1000 #microsec to ms
+    p = int(request.form['period']) * 1000 #microsec to ms
+    try:
+        DMD.SetTiming(illuminationTime= i, pictureTime = p)
+    except:
+        print('Error while setting timing',i,p)
     return request.form
 
 @app.route('/seq',methods=['POST'])
@@ -54,19 +57,25 @@ def seq():
             DMD.SeqAlloc(nbImg = nbImg, bitDepth = 1)
             DMD.SeqPut(imgData = seq)
         except:
-            print("Error while sending sequence")
-    return nbImg
+            print("Error while sending sequence",nbImg)
+    return f"{nbImg}"
 
 @app.route('/run')
 def run():
     print("Run...")
-    DMD.Run()
+    try:
+        DMD.Run()
+    except:
+        print("Error while launching DMD")
     return "run"
 
 @app.route('/stop')
 def stop():
     print("Stop")
-    DMD.Halt()
+    try:
+        DMD.Halt()
+    except:
+        print("Error while stopping the DMD")
     return "stop"
 
 if __name__=="__main__":
