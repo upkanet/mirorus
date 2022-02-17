@@ -9,16 +9,19 @@ DMD.Initialize()
 
 # Binary amplitude image (0 or 1)
 bitDepth = 1    
-imgBlack = np.zeros([DMD.nSizeY,DMD.nSizeX])
+##imgBlack = np.zeros([DMD.nSizeY,DMD.nSizeX])
 imgWhite = np.ones([DMD.nSizeY,DMD.nSizeX])*(2**8-1)
-imgSeq  = np.concatenate([imgBlack.ravel(),imgWhite.ravel()])
+##imgSeq  = np.concatenate([imgBlack.ravel(),imgWhite.ravel()])
+imgSeq  = np.concatenate([imgWhite.ravel()])
 
 # Allocate the onboard memory for the image sequence
-DMD.SeqAlloc(nbImg = 2, bitDepth = bitDepth)
+##DMD.SeqAlloc(nbImg = 2, bitDepth = bitDepth)
+DMD.SeqAlloc(nbImg = 1, bitDepth = bitDepth)
 # Send the image sequence as a 1D list/array/numpy array
 DMD.SeqPut(imgData = imgSeq)
 # Set image rate to 50 Hz
-DMD.SetTiming(pictureTime = 20000)
+##DMD.SetTiming(pictureTime = 20000)
+DMD.SetTiming(illuminationTime= 1000000,pictureTime = 2000000)
 
 # Run the sequence in an infinite loop
 DMD.Run()
