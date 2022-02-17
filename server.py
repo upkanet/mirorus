@@ -1,4 +1,5 @@
 from ALP4 import *
+from DMDTools import *
 from flask import Flask,render_template,request
 
 config = {
@@ -31,7 +32,9 @@ def timing():
 
 @app.route('/seq',methods=['POST'])
 def seq():
-    print(request.form)
+    # print(request.form)
+    dmdimg = DMDImg(request.form['img'])
+    dmdimg.seq()
     return request.form
 
 if __name__=="__main__":
