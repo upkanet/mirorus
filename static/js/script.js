@@ -52,11 +52,47 @@ function computeTiming(){
 }
 
 async function test(){
-    await draw.prepare("transformed");
-    console.log(dmd.seq);
+    var buffer = new Uint8Array(2);
+    function readBit(buffer, i, bit){
+    return (buffer[i] >> bit) % 2;
+    }
+    
+    function setBit(buffer, i, bit, value){
+    if(value == 0){
+        buffer[i] &= ~(1 << bit);
+    }else{
+        buffer[i] |= (1 << bit);
+    }
+    }
+
+
+setBit(buffer, 0, 0, 1)
+setBit(buffer, 0, 1, 1)
+setBit(buffer, 0, 2, 0)
+setBit(buffer, 0, 3, 1)
+
+setBit(buffer, 1, 2, 1)
+setBit(buffer, 1, 3, 1)
+
+// read back the bits
+console.log(
+    readBit(buffer, 0, 0),
+    readBit(buffer, 0, 1),
+    readBit(buffer, 0, 2),
+    readBit(buffer, 0, 3)
+  );
+
+console.log(
+  readBit(buffer, 1, 0),
+  readBit(buffer, 1, 1),
+  readBit(buffer, 1, 2),
+  readBit(buffer, 1, 3)
+);
 }
 
 async function run(){
     await draw.prepare("transformed");
-    console.log(dmd.imgArr);
+    await dmd.sendSeq();
+    // await dmd.sendTiming();
+    // await dmd.run();
 }

@@ -1,0 +1,8 @@
+POST http://localhost:5000/timing
+Content-Type: application/json
+
+{
+    "toto":10,
+    "tata":20
+}
+

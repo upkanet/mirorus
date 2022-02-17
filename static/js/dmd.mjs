@@ -38,15 +38,36 @@ class DMD{
     get seq(){
         let imgarr = this.imgArr;
         let nbimg = 0;
-        let aseq = [];
+        let seq = [];
         for(const color of ["white","green","blue","red","orange","yellow"]){
             if(imgarr[color] !== undefined){
-                nbimg += 1;
-                aseq = aseq.concat(imgarr[color]);
+                nbimg++;
+                seq = seq.concat(imgarr[color]);
             }
         }
-        return {nbimg:nbimg,seq:aseq};
+        console.log('seq/4',seq.length/4);
+        let buffer = new Uint8Array(seq.length/4);
+        seq.forEach((b,i)=>{
+            setBit(buffer, Math.floor(i/4), i%4, b);
+        });
+        return {nbimg:nbimg,seq:new Blob(buffer,{type:'application/octet-stream'})};
     }
+    
+    async sendTiming(){
+        let f = $('#inputTimingFlash').val();
+        let p = $('#inputTimingPeriod').val();
+        await $.post(`/timing`,{flash:f,period:p},(d)=>{
+            console.log(d);
+        });
+    }
+
+    async sendSeq(){
+        // console.log(this.seq);
+        await $.post(`/seq`,this.seq,(d)=>{
+            console.log(d);
+        });
+    }
+
 }
 
 
@@ -63,6 +84,18 @@ function getColor(r,v,b){
 
 function zeros(n){
     return new Array(n+1).join('0').split('').map(parseFloat)
+}
+
+function readBit(buffer, i, bit){
+    return (buffer[i] >> bit) % 2;
+}
+    
+function setBit(buffer, i, bit, value){
+    if(value == 0){
+        buffer[i] &= ~(1 << bit);
+    }else{
+        buffer[i] |= (1 << bit);
+    }
 }
 
 let dmd = new DMD('transformed');
