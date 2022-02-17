@@ -16,6 +16,7 @@ $('#btnInvert').click(()=>{draw.invert()});
 
 //Left menu
 $('#btnRun').click(run);
+$('#btnStop').click(()=>{dmd.stop()});
 $('#btnTest').click(test);
 
 //Right menu
@@ -58,6 +59,6 @@ async function test(){
 async function run(){
     await draw.prepare("transformed");
     await dmd.sendImg();
-    // await dmd.sendTiming();
-    // await dmd.run();
+    await dmd.sendTiming();
+    await dmd.run();
 }

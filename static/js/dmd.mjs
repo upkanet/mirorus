@@ -30,6 +30,14 @@ class DMD{
         });
     }
 
+    async run(){
+        await $.get(`/run`);
+    }
+
+    async stop(){
+        await $.get(`/stop`);
+    }
+
 }
 
 let dmd = new DMD('transformed');
