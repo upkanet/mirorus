@@ -17,6 +17,8 @@ $('#btnInvert').click(()=>{draw.invert()});
 //Left menu
 $('#btnRun').click(run);
 $('#btnStop').click(()=>{dmd.stop()});
+$('#btnSave').click(()=>{draw.saveImg()});
+$('#btnLoad').click(()=>{draw.loadImg()});
 $('#btnTest').click(test);
 
 //Right menu

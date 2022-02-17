@@ -154,6 +154,35 @@ class Drawing{
         this.ctx.putImageData(img,x*speed,y*speed);
     }
 
+    saveImg(){
+        var link = document.createElement('a');
+        link.download = 'image.png';
+        link.href = this.canvas.toDataURL();
+        link.click();
+        link.delete;
+    }
+
+    loadImg(){
+        let form = document.createElement('form');
+        var f = document.createElement('input');
+        f.style.display='none';
+        f.type='file';
+        f.name='file';
+        form.appendChild(f);
+        f.click();
+        $(f).change((e)=>{
+            var URL = window.webkitURL || window.URL;
+            var url = URL.createObjectURL(e.target.files[0]);
+            var img = new Image();
+            img.src = url;
+            img.onload = () => {
+                    let img_width = img.width;
+                    let img_height = img.height;
+                    this.ctx.drawImage(img, 0, 0, img_width, img_height);
+            }
+        })
+    }
+
 
 }
 
