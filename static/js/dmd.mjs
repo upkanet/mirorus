@@ -31,11 +31,23 @@ class DMD{
     }
 
     async run(){
+        this.showStatus('green');
+        let cit = $('#checkboxTimingLoop').prop('checked')
+        let it = $('#inputTimingIterations').val()
+        let p = $('#inputTimingPeriod').val();
         await $.get(`/run`);
+        if(!cit) setTimeout(()=>{this.stop()},it*p);
     }
 
     async stop(){
+        this.showStatus('red');
         await $.get(`/stop`);
+        this.showStatus('grey');
+    }
+
+    showStatus(status){
+        let sdmd = $('#statusDMD');
+        sdmd.css('color',status);
     }
 
 }
