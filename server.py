@@ -34,7 +34,10 @@ def timing():
 def seq():
     # print(request.form)
     dmdimg = DMDImg(request.form['img'])
-    dmdimg.seq()
+    nbImg,seq = dmdimg.seq()
+    print(nbImg,sum(seq))
+    DMD.SeqAlloc(nbImg = nbImg, bitDepth = 1)
+    DMD.SeqPut(imgData = seq)
     return request.form
 
 if __name__=="__main__":
