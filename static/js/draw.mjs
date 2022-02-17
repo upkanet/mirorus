@@ -180,6 +180,14 @@ class Drawing{
         ca.css('top',Number(ca.css('top').split('px')[0])+y*speed+'px');
     }
 
+    loadTarget(){
+        var img = new Image();
+        img.src = '/static/img/target.png';
+        img.onload = () => {
+            this.ctx.drawImage(img, 0, 0, img.width, img.height);
+        }
+    }
+
 
 }
 

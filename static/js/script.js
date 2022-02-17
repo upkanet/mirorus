@@ -13,6 +13,7 @@ $("#drawing").mouseout((e)=>{draw.mouseout(e)})
 $('#btnFullfield').click(()=>{draw.fullfield()});
 $('#btnDelete').click(()=>{draw.delete()});
 $('#btnInvert').click(()=>{draw.invert()});
+$('#btnTarget').click(()=>{draw.loadTarget()});
 
 //Left menu
 $('#btnRun').click(run);
