@@ -2,6 +2,7 @@ from ALP4 import *
 from DMDTools import *
 from flask import Flask,render_template,request
 import atexit
+import webbrowser
 
 def OnExitServer():
         print("Closing DMD")
@@ -79,4 +80,5 @@ def stop():
     return "stop"
 
 if __name__=="__main__":
+    webbrowser.open('http://localhost:5000')
     app.run()
