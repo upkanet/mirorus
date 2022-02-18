@@ -20,6 +20,7 @@ $('#btnRun').click(run);
 $('#btnStop').click(()=>{dmd.stop()});
 $('#btnSave').click(()=>{draw.saveImg()});
 $('#btnLoad').click(()=>{if(confirm("Erase and load new image ?")) draw.loadImg()});
+$('#btnHelp').click(toggleTooltips);
 $('#btnTest').click(test);
 
 //Right menu
@@ -32,6 +33,39 @@ $('#checkboxTimingLoop').change((e)=>{
 $('#inputTimingIterations').change(computeTiming);
 $('#spanTimingTotal').ready(computeTiming);
 $('#btnCircuitLoad').click(()=>{draw.loadCircuit()});
+
+//Tooltips
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('.hastooltip'))
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl)
+})
+tooltipList.forEach((tt)=>{
+    
+})
+
+function disableTooltips(){
+    tooltipList.forEach((tt)=>{
+        tt.hide();
+        tt.disable();
+    })
+}
+disableTooltips();
+
+function enableTooltips(){
+    tooltipList.forEach((tt)=>{
+        tt.enable();
+        tt.show();
+    })
+}
+
+let tooltipsOn = false;
+
+function toggleTooltips(){
+    if(tooltipsOn) disableTooltips();
+    else enableTooltips();
+    tooltipsOn = !tooltipsOn;
+}
+
 
 //Shortcuts
 $('body').keydown((e)=>{
