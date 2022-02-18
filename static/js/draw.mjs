@@ -185,7 +185,12 @@ class Drawing{
 
     scaleCircuit(speed,direction){
         let c = new Circuit('circuitarea');
-        c.scale(speed,direction);
+        c.changeScale(speed,direction);
+    }
+
+    rotateCircuit(speed,direction){
+        let c = new Circuit('circuitarea');
+        c.changeAngle(speed,direction);
     }
 
     loadTarget(){
@@ -218,9 +223,16 @@ class Circuit{
         return values.map((v)=>Number(v));
     }
 
-    get cScale(){
+    get scale(){
         let tm = this.transformMatrix;
-        return isNaN(tm[0]) ? 1 : tm[0];
+        if(tm.length == 0) return 1;
+        return Math.sqrt(tm[0]*tm[0]+tm[1]*tm[1]);
+    }
+
+    get angle(){
+        let tm = this.transformMatrix;
+        if(tm.length == 0) return 0;
+        return Math.round(Math.atan2(tm[1], tm[0]) * (180/Math.PI));
     }
 
     move(speed,x,y){
@@ -228,9 +240,18 @@ class Circuit{
         this.jq.css('top',this.top+y*speed+'px');
     }
 
-    scale(speed,direction){
-        let nscale = this.cScale+(speed*direction*0.01);
-        this.jq.css('transform',`scale(${nscale.toFixed(2)})`)
+    changeScale(speed,direction){
+        let nscale = this.scale+(speed*direction*0.01);
+        this.changeTransform(nscale.toFixed(2),this.angle);
+    }
+
+    changeAngle(speed,direction){
+        let nangle = this.angle+(speed*direction);
+        this.changeTransform(this.scale,nangle.toFixed(0));
+    }
+
+    changeTransform(scale,angle){
+        this.jq.css('transform',`scale(${scale}) rotate(${angle}deg)`)
     }
 
 }
