@@ -2,6 +2,20 @@ import io
 import base64
 from PIL import Image
 import numpy as np
+import colorama
+
+colorama.init()
+
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
 
 class DMDImg(object):
 
@@ -41,6 +55,11 @@ class DMDImg(object):
                 arrseq = np.concatenate((arrseq,arr[color].ravel()),axis=None)
         return (nbImg,arrseq)
         
+def printServer(*argv):
+    print(f"{bcolors.WARNING}[DMD]{bcolors.ENDC}",*argv)
+
+def printServerError(*argv):
+    print(f"{bcolors.FAIL}[DMD]{bcolors.ENDC}",*argv)
 
 
 def getColor(pixel):
