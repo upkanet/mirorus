@@ -179,9 +179,13 @@ class Drawing{
     }
 
     moveCircuit(speed,x,y){
-        let ca = $('#circuitarea');
-        ca.css('left',Number(ca.css('left').split('px')[0])+x*speed+'px');
-        ca.css('top',Number(ca.css('top').split('px')[0])+y*speed+'px');
+        let c = new Circuit('circuitarea');
+        c.move(speed,x,y);
+    }
+
+    scaleCircuit(speed,direction){
+        let c = new Circuit('circuitarea');
+        c.scale(speed,direction);
     }
 
     loadTarget(){
@@ -192,7 +196,42 @@ class Drawing{
             this.ctx.drawImage(img, 0, 0, img.width, img.height);
         }
     }
+}
 
+class Circuit{
+    constructor(id){
+        this.jq = $(`#${id}`);
+    }
+
+    get left(){
+        return Number(this.jq.css('left').split('px')[0]);
+    }
+
+    get top(){
+        return Number(this.jq.css('top').split('px')[0]);
+    }
+
+    get transformMatrix(){
+        let t = this.jq.css('transform');
+        if(t == 'none') return [];
+        let values = /\(\s*([^)]+?)\s*\)/.exec(t)[1].split(',');
+        return values.map((v)=>Number(v));
+    }
+
+    get cScale(){
+        let tm = this.transformMatrix;
+        return isNaN(tm[0]) ? 1 : tm[0];
+    }
+
+    move(speed,x,y){
+        this.jq.css('left',this.left+x*speed+'px');
+        this.jq.css('top',this.top+y*speed+'px');
+    }
+
+    scale(speed,direction){
+        let nscale = this.cScale+(speed*direction*0.01);
+        this.jq.css('transform',`scale(${nscale.toFixed(2)})`)
+    }
 
 }
 

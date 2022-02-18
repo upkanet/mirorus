@@ -42,10 +42,14 @@ $('body').keydown((e)=>{
     if(k == "ArrowUp") draw.move(s?2:1,0,-1)
     if(k == "ArrowDown") draw.move(s?2:1,0,1)
     if(k == "t") $('#transformed').toggle();
-    if(k == "q" || k == "Q") draw.moveCircuit(s?2:1,-1,0)
-    if(k == "d" || k == "D") draw.moveCircuit(s?2:1,1,0)
-    if(k == "z" || k == "Z") draw.moveCircuit(s?2:1,0,-1)
-    if(k == "s" || k == "S") draw.moveCircuit(s?2:1,0,1)
+
+    if(k == "q" || k == "Q") draw.moveCircuit(s?4:1,-1,0)
+    if(k == "d" || k == "D") draw.moveCircuit(s?4:1,1,0)
+    if(k == "z" || k == "Z") draw.moveCircuit(s?4:1,0,-1)
+    if(k == "s" || k == "S") draw.moveCircuit(s?4:1,0,1)
+
+    if(k == "r" || k == "R") draw.scaleCircuit(s?2:1,1)
+    if(k == "f" || k == "F") draw.scaleCircuit(s?2:1,-1)
 })
 
 function checkloop(e){
