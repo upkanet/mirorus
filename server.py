@@ -3,13 +3,26 @@ from DMDTools import *
 from flask import Flask,render_template,request
 import atexit
 import webbrowser
+import os
+import colorama
 
-def OnExitServer():
-        print("Closing DMD")
-        DMD.FreeSeq()
-        DMD.Free()
+colorama.init()
 
-atexit.register(OnExitServer)
+class bcolors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    ENDC = '\033[0m'
+    BOLD = '\033[1m'
+    UNDERLINE = '\033[4m'
+
+DMD = ALP4(version = '4.2',libDir = "dll")
+
+def printServer(*argv):
+    print(f"{bcolors.WARNING}[DMD]{bcolors.ENDC}",*argv)
 
 config = {
     "DEBUG": True,          # some Flask specific configs
@@ -20,16 +33,31 @@ config = {
 app = Flask(__name__,template_folder="public")
 app.config.from_mapping(config)
 
-#DMD
-DMD = ALP4(version = '4.2',libDir = "dll")
-try:
-    DMD.Initialize()
-except:
-    print("Enable to initialize DMD")
+#Run once on server startup
+if os.environ.get("WERKZEUG_RUN_MAIN") == "true":
+    try:
+        printServer("Initialize DMD")
+        DMD.Initialize()
+    except Exception as e:
+        printServer("Enable to initialize DMD")
+        printServer(e)
+    webbrowser.open('http://localhost:5000')
+    def OnExitServer():
+        printServer("Closing DMD")
+        try:
+            DMD.FreeSeq()
+        except Exception as e:
+            printServer("Error while freeing sequence")
+            printServer(e)
+        try:
+            DMD.Free()
+        except Exception as e:
+            printServer("Error while freeing DMD")
+            printServer(e)
+    atexit.register(OnExitServer)
 
 @app.route('/')
 def index():
-    print("index")
     return render_template("index.htm")
 
 @app.route('/timing', methods = ['POST'])
@@ -38,8 +66,9 @@ def timing():
     p = int(request.form['period']) * 1000 #microsec to ms
     try:
         DMD.SetTiming(illuminationTime= i, pictureTime = p)
-    except:
-        print('Error while setting timing',i,p)
+    except Exception as e:
+        printServer('Error while setting timing',i,p)
+        printServer(e)
     return request.form
 
 @app.route('/seq',methods=['POST'])
@@ -47,38 +76,46 @@ def seq():
     #Remove previous Sequence
     try:
         DMD.FreeSeq()
-    except:
-        print("Error while free DMD memory")
-    # print(request.form)
+    except Exception as e:
+        printServer("Error while free DMD memory")
+        printServer(e)
+    # printServer(request.form)
     dmdimg = DMDImg(request.form['img'])
     nbImg,seq = dmdimg.seq()
-    print(f"Sending {nbImg} images to the DMD")
+    printServer(f"Sending {nbImg} images to the DMD")
     if nbImg > 0:
         try:
             DMD.SeqAlloc(nbImg = nbImg, bitDepth = 1)
+        except Exception as e:
+            printServer(f"Error while allocating sequence with {nbImg} images")
+            printServer(e)
+        try:
             DMD.SeqPut(imgData = seq)
-        except:
-            print("Error while sending sequence",nbImg)
+        except Exception as e:
+            printServer(f"Error while puting sequence with {nbImg} images")
+            printServer(e)
+
     return f"{nbImg}"
 
 @app.route('/run')
 def run():
-    print("Run...")
+    printServer("Run...")
     try:
         DMD.Run()
-    except:
-        print("Error while launching DMD")
+    except Exception as e:
+        printServer("Error while launching DMD")
+        printServer(e)
     return "run"
 
 @app.route('/stop')
 def stop():
-    print("Stop")
+    printServer("Stop")
     try:
         DMD.Halt()
-    except:
-        print("Error while stopping the DMD")
+    except Exception as e:
+        printServer("Error while stopping the DMD")
+        printServer(e)
     return "stop"
 
 if __name__=="__main__":
-    webbrowser.open('http://localhost:5000')
     app.run()
