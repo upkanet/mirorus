@@ -28,11 +28,11 @@
             </div>
             <div class="col">
                 <div>
-                    <input type="range" class="form-range me-2 hastooltip" style="width:200px;" min="1" max="100" value="50" id="rangeRectSize" data-bs-placement="bottom" title="Choose brush size">
+                    <input type="range" class="form-range me-2 hastooltip" style="width:200px;" min="1" max="100" value="50" id="rangeRectSize" data-bs-placement="bottom" title="Brush size">
                     <button class="btn btn-primary mb-1 hastooltip" id="btnFullfield" data-bs-placement="bottom" title="Fullfield"><i class="ri-sun-line"></i></button>
-                    <button class="btn btn-primary mb-1 hastooltip" id="btnDelete"  data-bs-placement="bottom" title="Clear"><i class="ri-delete-bin-line"></i></button>
-                    <button class="btn btn-primary mb-1 hastooltip" id="btnInvert"  data-bs-placement="bottom" title="Invert"><i class="ri-contrast-fill"></i></button>
-                    <button class="btn btn-primary mb-1 hastooltip" id="btnTarget"  data-bs-placement="bottom" title="Target"><i class="ri-focus-3-line"></i></button>
+                    <button class="btn btn-primary mb-1 hastooltip" id="btnDelete" data-bs-placement="bottom" title="Clear"><i class="ri-delete-bin-line"></i></button>
+                    <button class="btn btn-primary mb-1 hastooltip" id="btnInvert" data-bs-placement="bottom" title="Invert"><i class="ri-contrast-fill"></i></button>
+                    <button class="btn btn-primary mb-1 hastooltip" id="btnTarget" data-bs-placement="bottom" title="Target"><i class="ri-focus-3-line"></i></button>
                 </div>
                 <div id="drawarea">
                     <div id="circuitarea"></div>
@@ -41,7 +41,7 @@
                 </div>
             </div>
             <div class="col-2">
-                <div id="colorButtonsMenu">
+                <div class="hastooltip" id="colorButtonsMenu" data-bs-placement="left" data-bs-html="true" title="One color per image<br>Number = Position in Sequence">
                     <button class="btncolor" data-color="white">1</button>
                     <button class="btncolor" data-color="green">2</button><br>
                     <button class="btncolor" data-color="blue">3</button>
@@ -53,23 +53,23 @@
                     <button class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#timingMenu"><i class="ri-timer-flash-line"></i> Timing</button>
                     <div class="collapse show" id="timingMenu">
                         <div class="card card-body">
-                            <div class="input-group mb-3">
+                            <div class="input-group mb-3 hastooltip" data-bs-placement="left" title="Duration of a single flash">
                                 <span class="input-group-text"><i class="ri-flashlight-fill"></i> Flash</span>
                                 <input type="number" class="form-control" value="10" id="inputTimingFlash">
                                 <span class="input-group-text">ms</span>
                             </div>
-                            <div class="input-group mb-3">
+                            <div class="input-group mb-3 hastooltip" data-bs-placement="left" title="Time between two flashes">
                                 <span class="input-group-text"><i class="ri-time-line"></i> Period</span>
                                 <input type="number" class="form-control" value="2000" id="inputTimingPeriod">
                                 <span class="input-group-text">ms</span>
                             </div>
-                            <div class="input-group mb-3">
+                            <div class="input-group mb-3 hastooltip" data-bs-placement="left" title="Number of flashes">
                                 <div class="input-group-text">
                                     <input class="form-check-input mt-0" type="checkbox" value="" id="checkboxTimingLoop" checked>
-                                    &nbsp;infinite loop
+                                    &nbsp;Loop
                                 </div>
-                                <span class="input-group-text">#</span>
                                 <input type="number" class="form-control" value="20" id="inputTimingIterations" disabled>
+                                <span class="input-group-text">flashes</span>
                             </div>
                             <span id="spanTimingTotal"></span>
                         </div>
@@ -77,10 +77,10 @@
                     <button class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#circuitMenu"><i class="ri-grid-fill"></i> Circuit</button>
                     <div class="collapse show" id="circuitMenu">
                         <div class="card card-body">
-                          <button class="btn btn-primary btn-lg" id="btnCircuitLoad"><i class="ri-image-line"></i> Load circuit</button>
+                          <button class="btn btn-primary btn-lg hastooltip" id="btnCircuitLoad" data-bs-placement="left" title="Load a circuit image in background"><i class="ri-image-line"></i> Load circuit</button>
                         </div>
                     </div>
-                    <button class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#calibMenu"><i class="ri-equalizer-fill"></i> Calibration</button>
+                    <button class="btn btn-secondary hastooltip" data-bs-toggle="collapse" data-bs-target="#calibMenu" data-bs-placement="left" title="Transform image according to microscope"><i class="ri-equalizer-fill"></i> Calibration</button>
                     <div class="collapse" id="calibMenu">
                         <div class="card card-body">
                             <div class="input-group mb-3">
@@ -109,7 +109,7 @@
                                     <img src="static/img/arrows.png" width="50"> Move
                                 </div>
                                 <div class="col">
-                                    <kbd>+ Ctrl</kbd> Erase<br>
+                                    <kbd>+ Ctrl</kbd> Eraser<br>
                                     <kbd>+ Shift</kbd> Faster
                                 </div>
                             </div>
