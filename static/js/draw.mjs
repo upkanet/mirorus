@@ -36,6 +36,7 @@ class Drawing{
     }
     
     mousemove(e){
+        this.enablecursor();
         if(this.activemouse) this.fillRect(e);
         if(this.activecursor) this.movecursor(e);
     }
@@ -90,8 +91,8 @@ class Drawing{
         this.full("white");
     }
 
-    delete(){
-        if(confirm("Delete everything")) this.ctx.clearRect(0,0,this.w,this.h);
+    clear(){
+        this.ctx.clearRect(0,0,this.w,this.h);
     }
 
     init(){
@@ -156,7 +157,9 @@ class Drawing{
 
     saveImg(){
         var link = document.createElement('a');
-        link.download = 'image.png';
+        let name = prompt("Image name","image");
+        if(name == "") return 0;
+        link.download = name+'.png';
         link.href = this.canvas.toDataURL();
         link.click();
         link.delete;
@@ -164,6 +167,7 @@ class Drawing{
 
     loadImg(){
         loadFile((img)=>{
+            this.clear();
             this.ctx.drawImage(img, 0, 0, img.width, img.height);
         })
     }
@@ -181,6 +185,7 @@ class Drawing{
     }
 
     loadTarget(){
+        this.clear();
         var img = new Image();
         img.src = '/static/img/target.png';
         img.onload = () => {

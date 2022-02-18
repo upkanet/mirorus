@@ -10,16 +10,16 @@ $("#drawing").mouseover((e)=>{draw.mouseover(e)})
 $("#drawing").mouseout((e)=>{draw.mouseout(e)})
 
 //Top menu
-$('#btnFullfield').click(()=>{draw.fullfield()});
-$('#btnDelete').click(()=>{draw.delete()});
-$('#btnInvert').click(()=>{draw.invert()});
-$('#btnTarget').click(()=>{draw.loadTarget()});
+$('#btnFullfield').click(()=>{if(confirm("Erase and load fullfield ?")) draw.fullfield()});
+$('#btnDelete').click(()=>{if(confirm("Delete everything ? ")) draw.clear()});
+$('#btnInvert').click(()=>{if(confirm("Are you sure you want to invert, it will loose color information ?")) draw.invert()});
+$('#btnTarget').click(()=>{if(confirm("Erase and load target image ?")) draw.loadTarget()});
 
 //Left menu
 $('#btnRun').click(run);
 $('#btnStop').click(()=>{dmd.stop()});
 $('#btnSave').click(()=>{draw.saveImg()});
-$('#btnLoad').click(()=>{draw.loadImg()});
+$('#btnLoad').click(()=>{if(confirm("Erase and load new image ?")) draw.loadImg()});
 $('#btnTest').click(test);
 
 //Right menu
