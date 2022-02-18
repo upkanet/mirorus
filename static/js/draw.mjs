@@ -24,14 +24,7 @@ class Drawing{
 
     mousedown(e){
         this.activemouse = true;
-        if(e.ctrlKey){
-            console.log("erase");
-            this.ctx.fillStyle="black";
-        }
-        else{
-            console.log("draw");
-            this.ctx.fillStyle=$(this.canvas).data('drawingcolor');
-        }
+        this.ctx.fillStyle=$(this.canvas).data('drawingcolor');
         this.fillRect(e);
     }
     
@@ -73,7 +66,8 @@ class Drawing{
     }
 
     fillRect(e){
-        this.ctx.fillRect(e.offsetX-this.rectsize/2,e.offsetY-this.rectsize/2,this.rectsize,this.rectsize);
+        if(e.ctrlKey) this.ctx.clearRect(e.offsetX-this.rectsize/2,e.offsetY-this.rectsize/2,this.rectsize,this.rectsize);
+        else this.ctx.fillRect(e.offsetX-this.rectsize/2,e.offsetY-this.rectsize/2,this.rectsize,this.rectsize);
     }
 
     selectColor(e){
