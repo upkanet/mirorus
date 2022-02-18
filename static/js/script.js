@@ -97,7 +97,7 @@ function computeTiming(){
     let period = $('#inputTimingPeriod').val();
     let iterations = $('#inputTimingIterations').prop('disabled') ? undefined : $('#inputTimingIterations').val();
     let tot = period * iterations;
-    let txt = isNaN(tot) ? 'inf' : `${tot/1000} sec`;
+    let txt = isNaN(tot) ? 'forever' : `${tot/1000} sec`;
     $('#spanTimingTotal').html(txt);
 }
 
