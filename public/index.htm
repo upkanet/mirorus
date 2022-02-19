@@ -18,15 +18,9 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-1 text-end">
-                <div class="btn-xlg" id="statusDMD"><i class="ri-checkbox-blank-circle-fill"></i></div>
-                <button class="btn btn-xlg btn-primary mb-1 hastooltip" id="btnRun" data-bs-placement="right" title="Run DMD"><i class="ri-play-fill"></i></button><br>
-                <button class="btn btn-xlg btn-primary mb-1 hastooltip" id="btnStop" data-bs-placement="right" title="Stop DMD"><i class="ri-stop-fill"></i></button><br>
-                <button class="btn btn-xlg btn-success mb-1 hastooltip" id="btnSave" data-bs-placement="right" title="Save drawing as an image"><i class="ri-save-3-line"></i></button><br>
-                <button class="btn btn-xlg btn-success mb-1 hastooltip" id="btnLoad" data-bs-placement="right" title="Load drawing from image"><i class="ri-folder-open-line"></i></button><br>
-                <button class="btn btn-xlg btn-secondary mb-1 hastooltip" id="btnHelp"><i class="ri-question-line"></i></button><br>
-                <button class="btn btn-xlg btn-secondary mb-1" id="btnTest"><i class="ri-flask-fill"></i></button><br>
+                {% include 'leftmenu.htm' %}
             </div>
-            <div class="col">
+            <div class="col centercol">
                 <div>
                     <input type="range" class="form-range me-2 hastooltip" style="width:200px;" min="1" max="100" value="50" id="rangeRectSize" data-bs-placement="bottom" title="Brush size">
                     <button class="btn btn-primary mb-1 hastooltip" id="btnFullfield" data-bs-placement="bottom" title="Fullfield"><i class="ri-sun-line"></i></button>
@@ -41,100 +35,7 @@
                 </div>
             </div>
             <div class="col-2">
-                <div class="hastooltip" id="colorButtonsMenu" data-bs-placement="left" data-bs-html="true" title="One color per image<br>Number = Position in Sequence">
-                    <button class="btncolor" data-color="white">1</button>
-                    <button class="btncolor" data-color="green">2</button><br>
-                    <button class="btncolor" data-color="blue">3</button>
-                    <button class="btncolor" data-color="red">4</button><br>
-                    <button class="btncolor" data-color="orange">5</button>
-                    <button class="btncolor" data-color="yellow">6</button>
-                </div>
-                <div class="d-grid gap-2">
-                    <button class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#timingMenu"><i class="ri-timer-flash-line"></i> Timing</button>
-                    <div class="collapse show" id="timingMenu">
-                        <div class="card card-body">
-                            <div class="input-group mb-3 hastooltip" data-bs-placement="left" title="Duration of a single flash">
-                                <span class="input-group-text"><i class="ri-flashlight-fill"></i> Flash</span>
-                                <input type="number" class="form-control" value="10" id="inputTimingFlash">
-                                <span class="input-group-text">ms</span>
-                            </div>
-                            <div class="input-group mb-3 hastooltip" data-bs-placement="left" title="Time between two flashes">
-                                <span class="input-group-text"><i class="ri-time-line"></i> Period</span>
-                                <input type="number" class="form-control" value="2000" id="inputTimingPeriod">
-                                <span class="input-group-text">ms</span>
-                            </div>
-                            <div class="input-group mb-3 hastooltip" data-bs-placement="left" title="Number of flashes">
-                                <div class="input-group-text">
-                                    <input class="form-check-input mt-0" type="checkbox" value="" id="checkboxTimingLoop" checked>
-                                    &nbsp;Loop
-                                </div>
-                                <input type="number" class="form-control" value="20" id="inputTimingIterations" disabled>
-                                <span class="input-group-text">flashes</span>
-                            </div>
-                            <div>
-                                Total : <span id="spanTimingTotal"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#circuitMenu"><i class="ri-grid-fill"></i> Circuit</button>
-                    <div class="collapse show" id="circuitMenu">
-                        <div class="card card-body">
-                          <button class="btn btn-primary btn-lg hastooltip" id="btnCircuitLoad" data-bs-placement="left" title="Load a circuit image in background"><i class="ri-image-line"></i> Load circuit</button>
-                        </div>
-                    </div>
-                    <button class="btn btn-secondary hastooltip" data-bs-toggle="collapse" data-bs-target="#calibMenu" data-bs-placement="left" title="Transform image according to microscope"><i class="ri-equalizer-fill"></i> Calibration</button>
-                    <div class="collapse" id="calibMenu">
-                        <div class="card card-body">
-                            <div class="input-group mb-3">
-                                <span class="input-group-text"><i class="ri-clockwise-line"></i> Rotate</span>
-                                <input type="number" class="form-control" id="inputCalibRotate" value="90">
-                                <span class="input-group-text">°</span>
-                            </div>
-                            <div class="btn-group mb-3" role="group" aria-label="Basic checkbox toggle button group">
-                                <input type="checkbox" class="btn-check" id="checkFlipH" autocomplete="off" checked>
-                                <label class="btn btn-outline-light" for="checkFlipH">Flip Horizontaly</label>
-                              
-                                <input type="checkbox" class="btn-check" id="checkFlipV" autocomplete="off">
-                                <label class="btn btn-outline-light" for="checkFlipV">Flip Verticaly</label>
-                            </div>
-                            <div>
-                                <kbd>T</kbd> Show transformed image
-                            </div>
-                        </div>
-                    </div>
-                    <button class="btn btn-secondary" data-bs-toggle="collapse" data-bs-target="#shortcutsMenu"><i class="ri-keyboard-line"></i> Shortcuts</button>
-                    <div class="collapse" id="shortcutsMenu">
-                        <div class="card card-header">Drawing</div>
-                        <div class="card card-body">
-                            <div class="row">
-                                <div class="col">
-                                    <img src="static/img/arrows.png" width="50"> Move
-                                </div>
-                                <div class="col">
-                                    <kbd>+ Ctrl</kbd> Eraser<br>
-                                    <kbd>+ Shift</kbd> Faster
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card card-header">Circuit</div>
-                        <div class="card card-body">
-                            <div class="row">
-                                <div class="col">
-                                    <img src="static/img/arrowsZ.png" width="50"> Move<br>
-                                    <br>
-                                    <kbd>+ Shift</kbd> Faster
-                                </div>
-                                <div class="col">
-                                    <kbd>A</kbd> Rotate <i class="ri-clockwise-line"></i><br>
-                                    <kbd>E</kbd> Rotate <i class="ri-anticlockwise-line"></i><br>
-                                    <kbd>R</kbd> Scale <i class="ri-add-circle-line"></i><br>
-                                    <kbd>F</kbd> Scale <i class="ri-indeterminate-circle-line"></i>
-                                </div>
-                            </div>
-                            
-                        </div>
-                    </div>
-                </div>
+                {% include 'rightmenu.htm' %}
             </div>
         </div>
     </div>

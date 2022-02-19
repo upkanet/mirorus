@@ -72,3 +72,7 @@
     position:absolute;
     border: 2px dashed white;
 }
+
+.centercol{
+    flex: 0 0 1050px;
+}
