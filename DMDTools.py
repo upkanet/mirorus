@@ -45,7 +45,7 @@ class DMDImg(object):
                 if pixel != (0,0,0):
                     # arr['colorname'][y][x]
                     color = getColor(pixel)
-                    if color is not None: arr[color][y][x] = 1
+                    if color is not None: arr[color][y][x] = 1.
         arrseq = []
         nbImg = 0
         for color in arr:
