@@ -53,6 +53,7 @@ class DMDImg(object):
             if sum(arr[color].ravel()) != 0: 
                 nbImg += 1
                 arrseq = np.concatenate((arrseq,arr[color].ravel()),axis=None)
+        arrseq = [e * (2**8-1) for e in arrseq]
         return (nbImg,arrseq)
         
 def printServer(*argv):
