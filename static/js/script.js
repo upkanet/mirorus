@@ -87,6 +87,16 @@ $('body').keydown((e)=>{
 
     if(k == "a" || k == "A") draw.rotateCircuit(s?2:1,-1)
     if(k == "e" || k == "E") draw.rotateCircuit(s?2:1,1)
+
+    if(k == "+") brushSize(1)
+    if(k == "-") brushSize(-1)
+
+    if(k == "&") $('[data-color="white"]').click()
+    if(k == "é") $('[data-color="green"]').click()
+    if(k == '"') $('[data-color="blue"]').click()
+    if(k == "'") $('[data-color="red"]').click()
+    if(k == "(") $('[data-color="orange"]').click()
+    if(k == "-") $('[data-color="yellow"]').click()
 })
 
 function checkloop(e){
@@ -103,6 +113,13 @@ function computeTiming(){
 
 async function test(){
 
+}
+
+function brushSize(direction){
+    let r = $('#rangeRectSize');
+    let step = Number(r.attr('step'));
+    let nval = Number(r.val()) + direction * step;
+    r.val(nval);
 }
 
 async function run(){
