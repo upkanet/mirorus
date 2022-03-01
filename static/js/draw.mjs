@@ -44,6 +44,7 @@ class Drawing{
     }
 
     mouseout(e){
+        this.activemouse = false;
         this.disablecursor();
     }
 
