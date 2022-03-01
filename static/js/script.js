@@ -82,11 +82,11 @@ $('body').keydown((e)=>{
     if(k == "z" || k == "Z") draw.moveCircuit(s?4:1,0,-1)
     if(k == "s" || k == "S") draw.moveCircuit(s?4:1,0,1)
 
-    if(k == "r" || k == "R") draw.scaleCircuit(s?2:1,1)
-    if(k == "f" || k == "F") draw.scaleCircuit(s?2:1,-1)
+    if(k == "r" || k == "R") draw.scaleCircuit(s?2:1,-1)
+    if(k == "f" || k == "F") draw.scaleCircuit(s?2:1,1)
 
-    if(k == "a" || k == "A") draw.rotateCircuit(s?2:1,1)
-    if(k == "e" || k == "E") draw.rotateCircuit(s?2:1,-1)
+    if(k == "a" || k == "A") draw.rotateCircuit(s?2:1,-1)
+    if(k == "e" || k == "E") draw.rotateCircuit(s?2:1,1)
 })
 
 function checkloop(e){

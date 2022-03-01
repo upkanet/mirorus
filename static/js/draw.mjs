@@ -212,42 +212,31 @@ class Circuit{
         return Number(this.jq.css('top').split('px')[0]);
     }
 
-    get transformMatrix(){
-        let t = this.jq.css('transform');
-        if(t == 'none') return [];
-        let values = /\(\s*([^)]+?)\s*\)/.exec(t)[1].split(',');
-        return values.map((v)=>Number(v));
-    }
-
-    get scale(){
-        let tm = this.transformMatrix;
-        if(tm.length == 0) return 1;
-        return Math.sqrt(tm[0]*tm[0]+tm[1]*tm[1]);
-    }
-
-    get angle(){
-        let tm = this.transformMatrix;
-        if(tm.length == 0) return 0;
-        return Math.round(Math.atan2(tm[1], tm[0]) * (180/Math.PI));
-    }
-
     move(speed,x,y){
         this.jq.css('left',this.left+x*speed+'px');
         this.jq.css('top',this.top+y*speed+'px');
     }
 
+    get scale(){
+        let s = this.jq.css('--circuit-scale');
+        if(isNaN(s)) return 1;
+        return Number(s);
+    }
+
     changeScale(speed,direction){
         let nscale = this.scale+(speed*direction*0.01);
-        this.changeTransform(nscale.toFixed(2),this.angle);
+        this.jq.css('--circuit-scale',nscale);
+    }
+
+    get angle(){
+        let a = this.jq.css('--circuit-angle');
+        if(a === undefined) return 0;
+        return Number(a.split('deg')[0]);
     }
 
     changeAngle(speed,direction){
         let nangle = this.angle+(speed*direction);
-        this.changeTransform(this.scale,nangle.toFixed(0));
-    }
-
-    changeTransform(scale,angle){
-        this.jq.css('transform',`scale(${scale}) rotate(${angle}deg)`)
+        this.jq.css('--circuit-angle',nangle+'deg');
     }
 
 }

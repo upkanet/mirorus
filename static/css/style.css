@@ -52,6 +52,7 @@ body{
     top:0px;
     overflow: hidden;
     transform-origin: top left;
+    transform: scale(var(--circuit-scale,1)) rotate(var(--circuit-angle,0deg));
 }
 
 #drawing{
