@@ -59,8 +59,8 @@ class Drawing{
 
     movecursor(e){
         let rs = this.rectsize;
-        $('#cursor').css('left',e.clientX - rs / 2);
-        $('#cursor').css('top',e.clientY - rs / 2);
+        $('#cursor').css('left',e.pageX - rs / 2);
+        $('#cursor').css('top',e.pageY - rs / 2);
         $('#cursor').css('width',rs);
         $('#cursor').css('height',rs);
     }
