@@ -32,6 +32,7 @@ $('#checkboxTimingLoop').change((e)=>{
 });
 $('#inputTimingIterations').change(computeTiming);
 $('#spanTimingTotal').ready(computeTiming);
+$('#btnTimingContinuous').click(continuousTiming)
 $('#btnCircuitLoad').click(()=>{draw.loadCircuit()});
 
 //Tooltips
@@ -109,6 +110,11 @@ function computeTiming(){
     let tot = period * iterations;
     let txt = isNaN(tot) ? 'forever' : `${tot/1000} sec`;
     $('#spanTimingTotal').html(txt);
+}
+
+function continuousTiming(){
+    let p = Number($('#inputTimingPeriod').val());
+    $('#inputTimingFlash').val(p);
 }
 
 async function test(){
