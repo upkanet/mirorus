@@ -19,7 +19,8 @@ class Drawing{
     }
 
     get rectsize(){
-        return Number($('#rangeRectSize').val()) / 100 * this.w / 10;
+        // return Number($('#rangeRectSize').val()) / 100 * this.w / 10;
+        return Number($('#rangeRectSize').val());
     }
 
     mousedown(e){
