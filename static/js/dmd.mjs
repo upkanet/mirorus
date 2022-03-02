@@ -32,20 +32,24 @@ class DMD{
 
     async run(){
         console.log("DMD run");
-        this.showStatus('green');
+        this.showStatus('success');
         await $.get(`/run`);
     }
 
     async stop(){
         console.log("DMD stop");
-        this.showStatus('red');
+        this.showStatus('danger');
         await $.get(`/stop`);
-        this.showStatus('grey');
+        this.showStatus('default');
     }
 
     showStatus(status){
         let sdmd = $('#statusDMD');
-        sdmd.css('color',status);
+        if(status == 'default'){
+            sdmd.html('<i class="ri-checkbox-blank-circle-fill"></i>');
+            return 0;    
+        }
+        sdmd.html(`<div class="spinner-grow text-${status}"></div>`);
     }
 
 }
