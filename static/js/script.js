@@ -17,7 +17,7 @@ $('#btnTarget').click(()=>{if(confirm("Erase and load target image ?")) draw.loa
 
 //Left menu
 $('#btnRun').click(run);
-$('#btnStop').click(()=>{dmd.stop()});
+$('#btnStop').click(stop);
 $('#btnSave').click(()=>{draw.saveImg()});
 $('#btnLoad').click(()=>{if(confirm("Erase and load new image ?")) draw.loadImg()});
 $('#btnHelp').click(toggleTooltips);
@@ -105,12 +105,32 @@ function checkloop(e){
     $('#inputTimingIterations').prop('disabled',e.target.checked)
 }
 
-function computeTiming(){
+function totalTiming(){
     let period = $('#inputTimingPeriod').val();
     let iterations = $('#inputTimingIterations').prop('disabled') ? undefined : $('#inputTimingIterations').val();
-    let tot = period * iterations;
+    return period * iterations;
+}
+
+function computeTiming(){
+    let tot = totalTiming();
     let txt = isNaN(tot) ? 'forever' : `${tot/1000} sec`;
     $('#spanTimingTotal').html(txt);
+}
+
+let timer = 0;
+
+function countdown(endtime){
+    if(isNaN(endtime)) return 0;
+    timer = endtime;
+    const countdownI = setInterval(()=>{
+        timer = timer - 100;
+        let html = (timer/1000).toFixed(1);
+        if(timer <=0){
+            clearInterval(countdownI);
+            html = "";
+        }
+        $('#divTimingCountdown').html(html);
+    },100)
 }
 
 function continuousTiming(){
@@ -140,9 +160,22 @@ function brushSize(direction){
     r.val(nval);
 }
 
+let stoptimeout;
+
 async function run(){
+    countdown(totalTiming());
     await draw.prepare("transformed");
     await dmd.sendImg();
     await dmd.sendTiming();
     await dmd.run();
+    let cit = $('#checkboxTimingLoop').prop('checked')
+    let it = $('#inputTimingIterations').val()
+    let p = $('#inputTimingPeriod').val();
+    if(!cit) stoptimeout = setTimeout(stop,it*p);
+}
+
+async function stop(){
+    timer = 0;
+    clearTimeout(stoptimeout);
+    await dmd.stop();
 }

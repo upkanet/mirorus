@@ -126,7 +126,7 @@ class Drawing{
         let r = Number($('#inputCalibRotate').val());
         let h = $('#checkFlipH').prop('checked');
         let v = $('#checkFlipV').prop('checked');
-        console.log(r,h,v);
+        // console.log(r,h,v);
         let tcan = document.getElementById(targetid);
         let tctx = tcan.getContext('2d');
 
@@ -242,7 +242,7 @@ class Circuit{
 }
 
 function initGrid(){
-    console.log("Init Grid");
+    // console.log("Init Grid");
     const canvasg = document.getElementById('drawinggrid');
     const w = canvasg.width;
     const h = canvasg.height;

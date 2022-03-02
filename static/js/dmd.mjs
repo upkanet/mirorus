@@ -20,26 +20,24 @@ class DMD{
         let f = $('#inputTimingFlash').val();
         let p = $('#inputTimingPeriod').val();
         await $.post(`/timing`,{flash:f,period:p},(d)=>{
-            console.log(d);
+            // console.log(d);
         });
     }
 
     async sendImg(){
         await $.post(`/seq`,{img:this.dataURL},(d)=>{
-            console.log(d);
+            // console.log(d);
         });
     }
 
     async run(){
+        console.log("DMD run");
         this.showStatus('green');
-        let cit = $('#checkboxTimingLoop').prop('checked')
-        let it = $('#inputTimingIterations').val()
-        let p = $('#inputTimingPeriod').val();
         await $.get(`/run`);
-        if(!cit) setTimeout(()=>{this.stop()},it*p);
     }
 
     async stop(){
+        console.log("DMD stop");
         this.showStatus('red');
         await $.get(`/stop`);
         this.showStatus('grey');
