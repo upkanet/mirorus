@@ -93,12 +93,12 @@ $('body').keydown((e)=>{
     if(k == "+") brushSize(1)
     if(k == "-") brushSize(-1)
 
-    if(k == "1") $('[data-color="white"]').click()
-    if(k == "2") $('[data-color="green"]').click()
-    if(k == "3") $('[data-color="blue"]').click()
-    if(k == "4") $('[data-color="red"]').click()
-    if(k == "5") $('[data-color="orange"]').click()
-    if(k == "6") $('[data-color="yellow"]').click()
+    if(s && k == "1") $('[data-color="white"]').click()
+    if(s && k == "2") $('[data-color="green"]').click()
+    if(s && k == "3") $('[data-color="blue"]').click()
+    if(s && k == "4") $('[data-color="red"]').click()
+    if(s && k == "5") $('[data-color="orange"]').click()
+    if(s && k == "6") $('[data-color="yellow"]').click()
 })
 
 function checkloop(e){
@@ -124,11 +124,12 @@ function countdown(endtime){
     timer = endtime;
     const countdownI = setInterval(()=>{
         timer = timer - 100;
-        let html = (timer/1000).toFixed(1);
+        let html = `<div class="progress mt-2" style="height: 20px;"><div class="progress-bar bg-warning text-dark progress-bar-striped" style="width:${Math.round(timer/endtime*100)}%">${(timer/1000).toFixed(1)}</div></div>`;
         if(timer <=0){
             clearInterval(countdownI);
             html = "";
         }
+        console.log(html);
         $('#divTimingCountdown').html(html);
     },100)
 }
