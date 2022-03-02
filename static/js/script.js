@@ -32,6 +32,7 @@ $('#checkboxTimingLoop').change((e)=>{
 });
 $('#inputTimingIterations').change(computeTiming);
 $('#spanTimingTotal').ready(computeTiming);
+$('#btnTimingDefault').click(resetTiming)
 $('#btnTimingContinuous').click(continuousTiming)
 $('#btnCircuitLoad').click(()=>{draw.loadCircuit()});
 
@@ -92,12 +93,12 @@ $('body').keydown((e)=>{
     if(k == "+") brushSize(1)
     if(k == "-") brushSize(-1)
 
-    if(k == "&") $('[data-color="white"]').click()
-    if(k == "é") $('[data-color="green"]').click()
-    if(k == '"') $('[data-color="blue"]').click()
-    if(k == "'") $('[data-color="red"]').click()
-    if(k == "(") $('[data-color="orange"]').click()
-    if(k == "-") $('[data-color="yellow"]').click()
+    if(k == "1") $('[data-color="white"]').click()
+    if(k == "2") $('[data-color="green"]').click()
+    if(k == "3") $('[data-color="blue"]').click()
+    if(k == "4") $('[data-color="red"]').click()
+    if(k == "5") $('[data-color="orange"]').click()
+    if(k == "6") $('[data-color="yellow"]').click()
 })
 
 function checkloop(e){
@@ -115,6 +116,17 @@ function computeTiming(){
 function continuousTiming(){
     let p = Number($('#inputTimingPeriod').val());
     $('#inputTimingFlash').val(p);
+}
+
+function resetTiming(){
+    function rst(id){
+        $(`#${id}`).val($(`#${id}`).attr('value'));
+        $(`#${id}`).prop('checked',$(`#${id}`).attr('checked') == 'checked');
+    }
+    rst('inputTimingFlash')
+    rst('inputTimingPeriod')
+    rst('checkboxTimingLoop')
+    rst('inputTimingIterations')
 }
 
 async function test(){
